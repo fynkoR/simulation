@@ -1,16 +1,20 @@
 package entity;
 
-import enums.EntityType;
 
 public abstract class Entity {
-    private int row;
-    private int col;
     private String icon;
-    private EntityType typeEntity;
-    public Entity(int row, int col, String icon, EntityType typeEntity){
-        this.row = row;
-        this.col = col;
+    public Entity(String icon){
         this.icon = icon;
-        this.typeEntity = typeEntity;
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    @Override
+    public String toString() {
+        return "Entity{" +
+                "icon='" + icon + '\'' +
+                '}';
     }
 }

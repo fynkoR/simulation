@@ -1,6 +1,10 @@
+package game;
+
 import java.util.Objects;
 
-public class Position {
+import static java.lang.Long.compare;
+
+public class Position implements Comparable<Position>{
     private int x;
     private int y;
     public Position(int x, int y){
@@ -26,7 +30,7 @@ public class Position {
 
     @Override
     public String toString() {
-        return "Position{" +
+        return "game.Position{" +
                 "x=" + x +
                 ", y=" + y +
                 '}';
@@ -43,4 +47,14 @@ public class Position {
     public int hashCode() {
         return Objects.hash(x, y);
     }
+
+    @Override
+    public int compareTo(Position o) {
+        int result = Integer.compare(this.getX(), o.getX());
+        if(result == 0){
+            result = Integer.compare(this.getY(), o.getY());
+        }
+        return result;
+    }
+
 }

@@ -1,8 +1,10 @@
+package game;
+
 import java.util.*;
 
 public class PathFinder {
 
-    public List<Position> bfs(Map map, Position start, Position target) {
+    public static List<Position> bfs(GameMap gameMap, Position start, Position target) {
 
         if (start == null || target == null) {
             return Collections.emptyList();
@@ -29,10 +31,10 @@ public class PathFinder {
                 break;
             }
             else{
-                List<Position> neighbors = map.getNeighbors(pos);
+                List<Position> neighbors = gameMap.getNeighbors(pos);
                 for(Position neighbor : neighbors){
                     if(!visited.contains(neighbor) &&
-                            (!map.getMap().containsKey(neighbor) || (neighbor.equals(target)))){
+                            (!gameMap.getMap().containsKey(neighbor) || (neighbor.equals(target)))){
                         queue.add(neighbor);
                         visited.add(neighbor);
                         parents.put(neighbor, pos);
@@ -48,7 +50,7 @@ public class PathFinder {
         }
     }
 
-    private List<Position> recoveryPath(HashMap<Position, Position> parents, Position target){
+    private static List<Position> recoveryPath(HashMap<Position, Position> parents, Position target){
         List<Position> path = new ArrayList<>();
         Position current = target;
         while(current != null){
@@ -56,6 +58,7 @@ public class PathFinder {
             current = parents.get(current);
         }
         Collections.reverse(path);
+        path.removeFirst();
         return path;
     }
 }

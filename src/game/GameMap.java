@@ -3,10 +3,7 @@ package game;
 import entity.Entity;
 import entity.creatures.Creature;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class GameMap {
     private HashMap<Position, Entity> map;
@@ -73,16 +70,19 @@ public class GameMap {
         return arr;
 
     }
-    public <T extends Entity> HashMap<Position, T> getEntityByClass(Class<T> objClass){
-        HashMap<Position, T> entities = new HashMap<>();
+    public <T extends Entity> List<Position> getEntitiesByClass(Entity entity, Class<T> objClass){
+        Position position = getKeyByValue(entity);
+        List<Position> entities = new ArrayList<>();
         for(Map.Entry <Position, Entity> e : map.entrySet()){
             if(objClass.isInstance(e.getValue())){
                 Map.Entry<Position,T> entry = (Map.Entry<Position, T>) e;
-                entities.put(entry.getKey(), entry.getValue());
+                entities.add(entry.getKey());
             }
         }
+        entities.sort(Comparator.comparingDouble(p -> p.distanceTo(position)));
         return entities;
     }
+
     public Position getKeyByValue(Entity entity){
         for(Map.Entry<Position, Entity> e : map.entrySet()){
             if(entity.equals(e.getValue())){
@@ -91,4 +91,10 @@ public class GameMap {
         }
         return null;
     }
+
+    public List<Entity> getEntities(){
+        return new ArrayList<>(map.values());
+    }
+
+
 }

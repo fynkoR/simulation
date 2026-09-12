@@ -6,6 +6,10 @@ import game.Position;
 
 public class Predator extends Creature {
 
+    public Predator(String icon, GameMap map){
+        super(icon, map);
+    }
+
     public Predator(String icon, GameMap map, int speed, int hp, int damage) {
         super(icon, map);
         this.damage = damage;

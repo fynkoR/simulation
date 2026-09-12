@@ -4,10 +4,11 @@ import java.util.Objects;
 
 import static java.lang.Long.compare;
 
-public class Position implements Comparable<Position>{
+public class Position implements Comparable<Position> {
     private int x;
     private int y;
-    public Position(int x, int y){
+
+    public Position(int x, int y) {
         this.x = x;
         this.y = y;
     }
@@ -51,10 +52,15 @@ public class Position implements Comparable<Position>{
     @Override
     public int compareTo(Position o) {
         int result = Integer.compare(this.getX(), o.getX());
-        if(result == 0){
+        if (result == 0) {
             result = Integer.compare(this.getY(), o.getY());
         }
         return result;
     }
 
+    public double distanceTo(Position other) {
+        int dx = this.x - other.getX();
+        int dy = this.y - other.getY();
+        return Math.sqrt(dx * dx + dy * dy);
+    }
 }

@@ -1,13 +1,17 @@
 package entity.actions;
 
 import entity.Entity;
-import entity.objects.Rock;
+import entity.creatures.Herbivore;
+import game.GameMap;
 
-public class RockSpawnAction extends SpawnAction{
+public class HerbivoreSpawnAction extends SpawnAction{
     private final int count;
     private final String icon;
-    public RockSpawnAction(int size){
-        this.icon = "\uD83E\uDEA8";
+    private final GameMap map;
+    public HerbivoreSpawnAction(GameMap map){
+        this.icon = "\uD83D\uDC04";
+        int size = map.getSize();
+        this.map = map;
         if(size >= 10){
             this.count = size / 5;
         }
@@ -16,6 +20,7 @@ public class RockSpawnAction extends SpawnAction{
         }
     }
 
+
     @Override
     public int getCount() {
         return this.count;
@@ -23,6 +28,6 @@ public class RockSpawnAction extends SpawnAction{
 
     @Override
     public Entity createEntity() {
-        return new Rock(icon);
+        return new Herbivore(icon, map, 3, 10, 2);
     }
 }

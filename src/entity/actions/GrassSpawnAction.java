@@ -1,18 +1,21 @@
 package entity.actions;
 
 import entity.Entity;
-import entity.objects.Tree;
+import entity.objects.Grass;
 
-public class TreeSpawnAction extends SpawnAction {
+public class GrassSpawnAction extends SpawnAction{
     private final int count;
     private final String icon;
-    public TreeSpawnAction(int size){
-        this.icon = "\uD83C\uDF33";
+    private final int hp;
+    public GrassSpawnAction(int size){
+        this.icon = "\uD83C\uDF3F";
+        this.hp = 4;
+
         if(size >= 10){
-            this.count = size / 5;
+            count = size / 5;
         }
         else{
-            count =1;
+            count = 1;
         }
     }
 
@@ -23,6 +26,6 @@ public class TreeSpawnAction extends SpawnAction {
 
     @Override
     public Entity createEntity() {
-        return new Tree(icon);
+        return new Grass(icon, hp);
     }
 }

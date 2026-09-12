@@ -18,6 +18,10 @@ public class Herbivore extends Creature {
         this.hp -= damage;
     }
 
+    public void healUp(){
+        this.hp += 5;
+    }
+
     @Override
     public void makeMove() {
         super.makeMove();
@@ -30,6 +34,7 @@ public class Herbivore extends Creature {
         if (grass.getHp() <= 0) {
             map.deleteEntity(position);
             map.moveEntity(position, this);
+            healUp();
         }
     }
 

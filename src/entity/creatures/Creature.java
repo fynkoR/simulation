@@ -5,6 +5,7 @@ import entity.Entity;
 import game.PathFinder;
 import game.Position;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 
@@ -24,14 +25,15 @@ public abstract class Creature extends Entity {
     }
 
     public void makeMove(){
-        Set<Position> targets = map.getEntityByClass(this.getTargetType()).keySet();
+        List<Position> targets = map.getEntitiesByClass(this, this.getTargetType());
+        Position closestTarget = targets.getFirst();
         if(isAlive && !targets.isEmpty()){
             List<Position> path = PathFinder.bfs(map, this.map.getKeyByValue(this),
-                    targets.stream().toList().getFirst());
+                    closestTarget);
             if(!path.isEmpty()){
                 if(path.size() == 1){
-                    attack(targets.stream().toList().getFirst(), damage);
-                    System.out.println(this + " attacked(1): " + targets.stream().toList().getFirst());
+                    attack(closestTarget, damage);
+                    //System.out.println(this + " attacked(1): " + targets.stream().toList().getFirst());
                 }
                 else{
                     for(int i = 0; i < this.getSpeed(); i++){
@@ -39,8 +41,8 @@ public abstract class Creature extends Entity {
                             map.moveEntity(path.get(i), this);
                         }
                         else{
-                            attack(targets.stream().toList().getFirst(), damage);
-                            System.out.println(this + " attacked(2): " + map.findEntity(targets.stream().toList().getFirst()));
+                            attack(closestTarget, damage);
+                            //System.out.println(this + " attacked(2): " + map.findEntity(targets.stream().toList().getFirst()));
                             break;
                         }
                     }
@@ -67,5 +69,14 @@ public abstract class Creature extends Entity {
 
     public void setHp(int hp) {
         this.hp = hp;
+    }
+
+    @Override
+    public String toString() {
+        return "Creature{" +
+                "hp=" + hp +
+                ", damage=" + damage +
+                ", isAlive=" + isAlive +
+                '}';
     }
 }

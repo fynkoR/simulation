@@ -42,14 +42,11 @@ public class GameMap {
     public void moveEntity(Position position, Creature creature){
         map.remove(getKeyByValue(creature));
         map.put(position, creature);
+        RenderMap.render(this);
     }
 
     public int getSize() {
         return size;
-    }
-
-    public void setSize(int size) {
-        this.size = size;
     }
 
     public List<Position> getNeighbors(Position pos) {
@@ -79,7 +76,9 @@ public class GameMap {
                 entities.add(entry.getKey());
             }
         }
-        entities.sort(Comparator.comparingDouble(p -> p.distanceTo(position)));
+        if(position != null){
+            entities.sort(Comparator.comparingDouble(p -> p.distanceTo(position)));
+        }
         return entities;
     }
 
@@ -96,5 +95,8 @@ public class GameMap {
         return new ArrayList<>(map.values());
     }
 
-
+    public Entity getEntityByPostion(Position position){
+        Entity entity = map.get(position);
+        return entity;
+    }
 }

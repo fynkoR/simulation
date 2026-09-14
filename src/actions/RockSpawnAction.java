@@ -1,18 +1,18 @@
-package entity.actions;
+package actions;
 
 import entity.Entity;
-import entity.objects.Tree;
+import entity.objects.Rock;
 
-public class TreeSpawnAction extends SpawnAction {
+public class RockSpawnAction extends SpawnAction{
     private final int count;
     private final String icon;
-    public TreeSpawnAction(int size){
-        this.icon = "\uD83C\uDF33";
+    public RockSpawnAction(int size){
+        this.icon = "\uD83E\uDEA8";
         if(size >= 10){
             this.count = size / 5;
         }
         else{
-            count =1;
+            this.count = 1;
         }
     }
 
@@ -23,6 +23,6 @@ public class TreeSpawnAction extends SpawnAction {
 
     @Override
     public Entity createEntity() {
-        return new Tree(icon);
+        return new Rock(icon);
     }
 }

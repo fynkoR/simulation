@@ -1,25 +1,24 @@
-package entity.actions;
+package actions;
 
 import entity.Entity;
-import entity.creatures.Herbivore;
+import entity.creatures.Predator;
 import game.GameMap;
 
-public class HerbivoreSpawnAction extends SpawnAction{
+public class PredatorSpawnAction extends SpawnAction{
     private final int count;
     private final String icon;
     private final GameMap map;
-    public HerbivoreSpawnAction(GameMap map){
-        this.icon = "\uD83D\uDC04";
+    public PredatorSpawnAction(GameMap map){
+        this.icon = "\uD83E\uDD81";
         int size = map.getSize();
-        this.map = map;
         if(size >= 10){
-            this.count = size / 5;
+            this.count = size / 10;
         }
         else{
             this.count = 1;
         }
+        this.map = map;
     }
-
 
     @Override
     public int getCount() {
@@ -28,6 +27,6 @@ public class HerbivoreSpawnAction extends SpawnAction{
 
     @Override
     public Entity createEntity() {
-        return new Herbivore(icon, map, 3, 10, 2);
+        return new Predator(icon, map, 3, 15, 5);
     }
 }

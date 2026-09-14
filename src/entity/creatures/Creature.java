@@ -26,8 +26,8 @@ public abstract class Creature extends Entity {
 
     public void makeMove(){
         List<Position> targets = map.getEntitiesByClass(this, this.getTargetType());
-        Position closestTarget = targets.getFirst();
         if(isAlive && !targets.isEmpty()){
+            Position closestTarget = targets.getFirst();
             List<Position> path = PathFinder.bfs(map, this.map.getKeyByValue(this),
                     closestTarget);
             if(!path.isEmpty()){
